@@ -1,0 +1,1170 @@
+{
+	"info": {
+		"_postman_id": "6f3b88ef-52d4-4dec-aa68-abebb5060132",
+		"name": "wp6b",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request Funds",
+			"item": [
+				{
+					"name": "Get Funds Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/fundsSummary?segment=CASH_MARKET&currentDate=2020-09-11",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"fundsSummary"
+							],
+							"query": [
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "currentDate",
+									"value": "2020-09-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Fund",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"segment\": \"Cash Market\",\n    \"stpType\": \"N\",\n    \"stpNo\": \"2020184\",\n    \"bankName\": \"HDFC\",\n    \"epiAmount\": 1000000.60,\n    \"epiAmountInWords\": \"Fifty Lakh Only\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/requestFunds",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"requestFunds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Funds Requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/requestFunds?page=0&pageSize=10&sortBy=requestTime&sortAsc=false&segment=CASH_MARKET",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"requestFunds"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "requestTime"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Funds Requests",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/requestFunds/confirmAllPending",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"requestFunds",
+								"confirmAllPending"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Allocate Funds",
+			"item": [
+				{
+					"name": "Allocate Funds to client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"segment\": \"Cash Market\",\n    \"stpType\": \"N\",\n    \"stpNo\": \"2020184\",\n    \"tmCpCode\": \"CITI02030311\",\n    \"clientCode\": \"R22492103821\",\n    \"epiAmount\": 100.60,\n    \"epiAmountInWords\": \"Fifty Lakh Only\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Allocate Funds to security",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"segment\": \"Cash Market\",\n    \"stpType\": \"N\",\n    \"stpNo\": \"2020184\",\n    \"tmCpCode\": \"CITI02030311\",\n    \"clientCode\": \"R22492103821\",\n    \"symbol\": \"ASIANPAINT\",\n    \"series\": \"EQ\",\n    \"epiAmount\": 10.60,\n    \"epiAmountInWords\": \"Fifty Lakh Only\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload EPF file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('uploadedFile', pm.response.json().uploadedFile);",
+									"pm.environment.set('returnFile', pm.response.json().returnFile);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "segment",
+									"value": "CASH_MARKET",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mac/TopCoder/clear-settlement/topcoder-service/docs/CLNTEPF_N_2020184_20201230.T01"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/upload",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process EPF file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"segment\": \"Cash Market\",\n    \"uploadedFile\": \"{{uploadedFile}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/process",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download return file",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"value": "00",
+								"type": "text"
+							},
+							{
+								"key": "userId",
+								"value": "00",
+								"type": "text"
+							},
+							{
+								"key": "memberType",
+								"value": "CM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/download?returnFile={{returnFile}}",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"download"
+							],
+							"query": [
+								{
+									"key": "returnFile",
+									"value": "{{returnFile}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Allocate Funds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/confirmAllPending",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"confirmAllPending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AllocateFunds at Client Level",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/client?page=0&pageSize=10&sortBy=stpTypeNo&sortAsc=false&segment=CASH_MARKET&stpTypeNo=N2020184",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"client"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "stpTypeNo"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184"
+								},
+								{
+									"key": "tmCpCode",
+									"value": "111",
+									"disabled": true
+								},
+								{
+									"key": "clientCode",
+									"value": "222",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AllocateFunds at Security Level",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/security?page=0&pageSize=10&sortBy=stpTypeNo&sortAsc=false&segment=CASH_MARKET&stpTypeNo=N2020184",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"security"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "stpTypeNo"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184"
+								},
+								{
+									"key": "tmCpCode",
+									"value": "111",
+									"disabled": true
+								},
+								{
+									"key": "clientCode",
+									"value": "222",
+									"disabled": true
+								},
+								{
+									"key": "symbolSeries",
+									"value": "ASIANPAINT-EQ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AllocateFunds History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateFunds/history?page=0&pageSize=10&sortBy=requestTime&sortAsc=false&segment=CASH_MARKET&stpTypeNo=N2020184",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateFunds",
+								"history"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "requestTime"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184"
+								},
+								{
+									"key": "tmCpCode",
+									"value": "111",
+									"disabled": true
+								},
+								{
+									"key": "clientCode",
+									"value": "222",
+									"disabled": true
+								},
+								{
+									"key": "symbolSeries",
+									"value": "ASIANPAINT-EQ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Allocate Securities",
+			"item": [
+				{
+					"name": "Get Securities Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/securitiesSummary?page=0&pageSize=10&sortBy=isin&sortAsc=false&segment=CASH_MARKET&stpTypeNo=N2020184",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"securitiesSummary"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "isin"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload EPF file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('uploadedFile', pm.response.json().uploadedFile);",
+									"pm.environment.set('returnFile', pm.response.json().returnFile);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "segment",
+									"value": "CASH_MARKET",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/mac/TopCoder/clear-settlement/topcoder-service/docs/00_CLNTEPI_20201230.T01"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities/upload",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process EPF file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"segment\": \"Cash Market\",\n    \"uploadedFile\": \"{{uploadedFile}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities/process",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download return file",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"value": "00",
+								"type": "text"
+							},
+							{
+								"key": "userId",
+								"value": "00",
+								"type": "text"
+							},
+							{
+								"key": "memberType",
+								"value": "CM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities/download?returnFile={{returnFile}}",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities",
+								"download"
+							],
+							"query": [
+								{
+									"key": "returnFile",
+									"value": "{{returnFile}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Allocate Securities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities/confirmAllPending",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities",
+								"confirmAllPending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AllocateSecurities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities?page=0&pageSize=10&sortBy=stpTypeNo&sortAsc=false&segment=CASH_MARKET",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "stpTypeNo"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184",
+									"disabled": true
+								},
+								{
+									"key": "tmCpCode",
+									"value": "111",
+									"disabled": true
+								},
+								{
+									"key": "clientCode",
+									"value": "222",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AllocateSecurities History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "memberId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "00"
+							},
+							{
+								"key": "memberType",
+								"type": "text",
+								"value": "CM"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8080/v1/allocateSecurities/history?page=0&pageSize=10&sortBy=requestTime&sortAsc=false&segment=CASH_MARKET",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"allocateSecurities",
+								"history"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "requestTime"
+								},
+								{
+									"key": "sortAsc",
+									"value": "false"
+								},
+								{
+									"key": "segment",
+									"value": "CASH_MARKET"
+								},
+								{
+									"key": "stpTypeNo",
+									"value": "N2020184",
+									"disabled": true
+								},
+								{
+									"key": "tmCpCode",
+									"value": "111",
+									"disabled": true
+								},
+								{
+									"key": "clientCode",
+									"value": "222",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

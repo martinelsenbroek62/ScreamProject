@@ -1,0 +1,760 @@
+
+openapi: 3.0.2
+info:
+  title: Shortage Service - REST
+  description: Authentication depends on signed-in user. Admin or specific Professor. Details to come in on API Header
+  version: 1.0.0
+servers:
+  - url: /v1
+
+tags:
+  - name: shortage-service
+
+paths:
+  /shortages:
+    put:
+      tags:
+        - shortage-service
+      description: Entering Professor shortages through GUI
+      requestBody:
+        description: Entering Professor shortages through GUI
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorShortage'
+
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorShortageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /fileShortages:
+    put:
+      tags:
+        - shortage-service
+      description: Entering Professor shortages from file
+      requestBody:
+        description: Entering Professor shortages from file
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProfessorShortage'
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfessorShortageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /shortageFilters:
+    get:
+      tags:
+        - shortage-service
+      description: GET distinct Monitor names and securitytypes
+      parameters:
+        - name: settleNo
+          in: query
+          schema:
+            type: string
+        - name: settlementDate
+          in: query
+          schema:
+            type: string
+        - name: professorID
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProfessorShortageFiltersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /auctionShortages:
+    get:
+      tags:
+        - shortage-service
+      description: GET shortage details
+      parameters:
+        - name: monitorName
+          in: query
+          schema:
+            type: string
+        - name: securityTypes
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfessorShortageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /shortageFiltersAdmin:
+    get:
+      tags:
+        - shortage-service
+      description: GET distinct Monitor names and securitytypes
+      parameters:
+        - name: settleNo
+          in: query
+          schema:
+            type: string
+        - name: settlementDate
+          in: query
+          schema:
+            type: string
+        - name: professorID
+          in: query
+          schema:
+            type: string
+        - name: aggregatedFlag
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProfessorShortageFiltersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /shortageFiltersProfessor:
+    get:
+      tags:
+        - shortage-service
+      description: GET distinct Monitor names and securitytypes
+      parameters:
+        - name: settleNo
+          in: query
+          schema:
+            type: string
+        - name: settlementDate
+          in: query
+          schema:
+            type: string
+        - name: professorID
+          in: query
+          schema:
+            type: string
+        - name: aggregatedFlag
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorShortageFiltersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /payinObligation:
+    get:
+      tags:
+        - shortage-service
+      description: Auction pay-in obligations
+      parameters:
+        - name: professorId
+          in: query
+          schema:
+            type: string
+        - name: settlementNo
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorPayinObligationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /professorResults:
+    get:
+      tags:
+        - shortage-service
+      description: Get the auction results aggregated by Professor
+      parameters:
+        - name: settlementNo
+          in: query
+          schema:
+            type: string
+        - name: monitorName
+          in: query
+          schema:
+            type: string
+        - name: securityType
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfessorResultsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /secuirtyResults:
+    get:
+      tags:
+        - shortage-service
+      description: Get the auction results aggregated by Security type
+      parameters:
+        - name: settlementNo
+          in: query
+          schema:
+            type: string
+        - name: monitorName
+          in: query
+          schema:
+            type: string
+        - name: securityType
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/SecurityResultsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /allocatedshortagePayouts:
+    get:
+      tags:
+        - shortage-service
+      description: GET shortage details allocated to me
+      parameters:
+        - name: settlementNo
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: header
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/ProfessorProfessorAllocatedResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /myShortagePayouts:
+    get:
+      tags:
+        - shortage-service
+      description: GET my shortages
+      parameters:
+        - name: settlementNo
+          in: query
+          schema:
+            type: string
+        - name: userId
+          in: header
+          schema:
+            type: string
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/MyShortagePayout'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /settlementSchedule:
+    get:
+      tags:
+        - shortage-service
+      description: GET settlement schedule
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/ProfessorSettlementScheduleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /shortagesByLevel:
+    get:
+      tags:
+        - shortage-service
+      description: GET shortages based on levels
+      parameters:
+        - name: settlementNo
+          description: Required for SD users, the settlement no to look for.
+          in: query
+          schema:
+            type: string
+          required: false
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [shortagesAllocatedToMe, myShortages]
+          required: true
+        - name: memberId
+          description: For XYZ users, the mc_code to look for. Not required.
+          in: query
+          schema:
+            type: string
+          required: false
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/ProfessorShortagesByLevelResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /professors:
+    get:
+      tags:
+        - shortage-service
+      description: GET distinct Professors
+      responses:
+        '201':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/ProfessorsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+
+
+# Define the reusable objects
+components:
+  # Use JSON Web Token in header for authentication
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: ProfessorId
+
+  # Define commonly-used error responses
+  responses:
+    BadRequestError:
+      description: Missing or malformed parameters/body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    UnauthorizedError:
+      description: Missing or invalid JSON Web Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+
+  # Define the data models
+  schemas:
+    Shortage:
+      type: object
+      properties:
+        recordType:
+          type: integer
+          format: int32
+        seniorProfessorIdentification:
+          type: string
+        mtCode:
+          type: string
+        monitorIdentification:
+          type: string
+        otherFinancialInstrumentIdentification:
+          type: string
+        series:
+          type: string
+        allocationForAuction:
+          type: integer
+          format: int32
+    ShortageResponse:
+      type: object
+      properties:
+        recordType:
+          type: integer
+          format: int32
+        seniorProfessorIdentification:
+          type: string
+        mtCode:
+          type: string
+        monitorIdentification:
+          type: string
+        otherFinancialInstrumentIdentification:
+          type: string
+        series:
+          type: string
+        allocationForAuction:
+          type: integer
+          format: int32
+        errorMsgs:
+          type: array
+          items:
+            type: string
+    ProfessorShortage:
+      type: object
+      properties:
+        monitorName:
+          type: string
+        securityType:
+          type: string
+        shortages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shortage'
+    ProfessorShortageResponse:
+      type: object
+      properties:
+        monitorName:
+          type: string
+        securityType:
+          type: string
+        respoMCQMessage:
+          type: string
+        statusCode:
+          type: string
+        shortages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortageResponse'
+
+    # Message returned by endpoints on error conditions
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+    ProfessorShortageFilters:
+      type: object
+      properties:
+        settleNo:
+          type: string
+        settlementDate:
+          type: string
+        professorID:
+          type: string
+        aggregatedFlag:
+          type: string
+
+    ProfessorShortageFiltersResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+        MonitorSecurityType:
+          type: array
+          items:
+            type: object
+            properties:
+              monitorName:
+                type: string
+              securityType:
+                type: string
+
+    ProfessorPayinObligation:
+      type: object
+      properties:
+        professorID:
+          type: string
+        AuctionNo:
+          type: string
+
+    ProfessorPayinObligationResponse:
+      type: object
+      properties:
+        payinValue:
+          type: number
+        status:
+          type: string
+        date:
+          type: string
+
+    ProfessorResults:
+      type: object
+      properties:
+        aggregatedByProfessor:
+          type: string
+        securitytype:
+          type: string
+
+    ProfessorResultsResponse:
+      type: object
+      properties:
+        securityType:
+          type: string
+        shortages:
+          type: array
+          items:
+            type: object
+            properties:
+              seniorProfessor:
+                type: string
+              auctions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    monitorName:
+                      type: string
+                    monitorCode:
+                      type: string
+                    allocatedForAuction:
+                      type: number
+                    fullfilledAuction:
+                      type: number
+                    allocatedTowardsAuction:
+                      type: number
+                    receivableFromAuction:
+                      type: number
+                    receivedFromAuction:
+                      type: number
+                    auctionShortage:
+                      type: number
+                    auctionPayIn:
+                      type: number
+                    closeoutValue:
+                      type: string
+
+    SecurityResultsResponse:
+      type: object
+      properties:
+        securityType:
+          type: string
+        shortages:
+          type: array
+          items:
+            type: object
+            properties:
+              isin:
+                type: string
+              symbol:
+                type: string
+              series:
+                type: string
+              auctions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    monitorName:
+                      type: string
+                    monitorCode:
+                      type: string
+                    allocatedForAuction:
+                      type: number
+                    fullfilledAuction:
+                      type: number
+                    allocatedTowardsAuction:
+                      type: number
+                    receivableFromAuction:
+                      type: number
+                    receivedFromAuction:
+                      type: number
+                    auctionShortage:
+                      type: number
+
+    MyShortagePayout:
+      type: array
+      items:
+        type: object
+        properties:
+          ISIN:
+            type: string
+          otherFinancialInstrumentIdentification:
+            type: string
+          series:
+            type: string
+          obligationQuantity:
+            type: number
+          quantityPaidIn:
+            type: number
+
+    ProfessorProfessorAllocatedResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          ISIN:
+            type: string
+          otherFinancialInstrumentIdentification:
+            type: string
+          series:
+            type: string
+          receivableQuantity:
+            type: number
+          quantityReceived:
+            type: number
+
+    ProfessorSettlementScheduleResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          endDate:
+            type: string
+          endTime:
+            type: string
+          event:
+            type: string
+          resultSegment:
+            type: string
+          settlement:
+            type: string
+
+    ProfessorShortagesByLevel:
+        type: object
+        properties:
+          settlementNo:
+            type: string
+          settlementDate:
+            type: string
+          level:
+            type: string
+          shortages:
+            type: string
+          segment:
+            type: array
+            items:
+              type: string
+          professorId:
+            type: string
+
+    ProfessorShortagesByLevelResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          mcCode:
+            type: string
+          mcName:
+            type: string
+          isin:
+            type: string
+          series:
+            type: string
+          symbol:
+            type: string
+          quantityReceivable:
+            type: integer
+            format: int32
+          netReceivedQuantity:
+            type: integer
+            format: int32
+          shortagesAmount:
+            type: number
+            format: double
+          valuationPrice:
+            type: number
+            format: double
+          valueNetReceived:
+            type: number
+            format: double
+          valueDpoCompleted:
+            type: number
+            format: double
+          valueReceivedRepository:
+            type: integer
+            format: int32
+          obligationQuantity:
+            type: integer
+            format: int32
+            description: Only returned when type = 'myShortages'
+          quantityPaidIn:
+            type: integer
+            format: int32
+            description: Only returned when type = 'myShortages'
+
+    ProfessorsResponse:
+      type: array
+      items:
+        type: string

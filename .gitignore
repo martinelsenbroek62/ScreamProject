@@ -1,0 +1,6 @@
+.DS_Store
+shortages-server/.settings
+shortages-server/target
+shortages-server/.classpath
+shortages-server/.project
+shortages-server/upload

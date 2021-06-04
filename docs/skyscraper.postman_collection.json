@@ -1,0 +1,1408 @@
+{
+	"info": {
+		"_postman_id": "9b8a7758-781f-4593-a500-c0d318b07e55",
+		"name": "skyscraper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "shortages",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"monitorName\":\"c1\",\r\n    \"securitytype\": \"typeId1\",\r\n    \"shortages\": [\r\n     {\r\n        \"recordType\": 11,\r\n        \"seniorMemberIdentification\": \"CIT05739702\",\r\n        \"mtCode\": \"MT00193849\",\r\n        \"monitorIdentification\": 2324220970,\r\n        \"otherFinancialInstrumentIdentification\": \"ADANIPORTS\",\r\n        \"series\": \"ËQ\",\r\n        \"allocationForAuction\": 40\r\n    }\r\n]\r\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/shortages",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"shortages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fileShortages",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"value": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/fileShortages",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fileShortages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shortageFiltersAdmin",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/shortageFiltersAdmin?",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"shortageFiltersAdmin"
+					],
+					"query": [
+						{
+							"key": "settleNo",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "settlementDate",
+							"value": "20201029",
+							"disabled": true
+						},
+						{
+							"key": "memberId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "aggregatedFlag",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shortageFiltersMember",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/shortageFiltersMember",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"shortageFiltersMember"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shortageFilters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/shortageFilters?",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"shortageFilters"
+					],
+					"query": [
+						{
+							"key": "settleNo",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "settlementDate",
+							"value": "20201029",
+							"disabled": true
+						},
+						{
+							"key": "memberId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "aggregatedFlag",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "members",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/members",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get reports",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/reports",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Report",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"reports\": [\n\t\t{\n\t\t\t\"reportId\": \"ID041\",\n\t\t\t\"modifiedETA\": 1234\n\t\t}, {\n\t\t\t\"reportId\": \"ID021\",\n\t\t\t\"modifiedETA\": 1234\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/reports",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shortagesByLevel",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "userId",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "memberType",
+						"value": "member",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/shortagesByLevel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"shortagesByLevel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "settlementSchedule",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/settlementSchedule",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"settlementSchedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "netFunds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/cashSettlement/clearingMember/settlement/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cashSettlement",
+						"clearingMember",
+						"settlement",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "netFunds NCL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/cashSettlement/clearingMember/PROF002/settlement/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cashSettlement",
+						"clearingMember",
+						"PROF002",
+						"settlement",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "netFunds by Segment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/cashSettlement/segment/COMMODITIES/obligation/payable",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cashSettlement",
+						"segment",
+						"COMMODITIES",
+						"obligation",
+						"payable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "directPayout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/directPayout",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"directPayout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Direct Payout data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"monitorDirectPayout\" : [\r\n\t\t\r\n\t\t{\r\n\t\t\t\"header\" : {\r\n\t\t\t\t\"recordType\" : \"10\",\r\n\t\t\t\t\"fileType\" : \"CPD\",\r\n\t\t\t\t\"memberType\" : \"M\",\r\n\t\t\t\t\"memberCode\" : \"PROF001\",\r\n\t\t\t\t\"settlementType\" : \"N\",\r\n\t\t\t\t\"settlementNumber\" : \"3371777\",\r\n\t\t\t\t\"deliveryType\" : \"D\",\r\n\t\t\t\t\"batchNumber\" : \"22\",\r\n\t\t\t\t\"totalRecords\" : \"2\",\r\n\t\t\t\t\"totalQuantity\" : \"121323\"\r\n\t\t\t},\r\n\t\t\t\"payoutDetails\" : [\r\n\t\t\t\t{\t\t\t\r\n\t\t\t\t\t\"recordType\" : \"20\",\r\n\t\t\t\t\t\"isin\" : \"23233\",\r\n\t\t\t\t\t\"depositoryID\" : \"NCML\",\r\n\t\t\t\t\t\"beneficiaryAccountNo\" : \"232323234\",\r\n\t\t\t\t\t\"quantity\" : \"121323\"\r\n\t\t\t\t}, {\t\t\t\r\n\t\t\t\t\t\"recordType\" : \"\",\r\n\t\t\t\t\t\"isin\" : \"23233\",\r\n\t\t\t\t\t\"depositoryID\" : \"34432\",\r\n\t\t\t\t\t\"beneficiaryAccountNo\" : \"232323234\",\r\n\t\t\t\t\t\"quantity\" : \"1213123\"\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/monitorDirectPayout",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"monitorDirectPayout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DPO Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/directPayout/settlement/N5677539/isRequest/class/ClassB",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"directPayout",
+						"settlement",
+						"N5677539",
+						"isRequest",
+						"class",
+						"ClassB"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "settlementMyShortage by SettlementNo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/settlementShortageAllocatedToMe/settlement/N5677539",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"settlementShortageAllocatedToMe",
+						"settlement",
+						"N5677539"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "settlementMyShortage by Segment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/settlementMyShortage/segment/FUTURES_OPTIONS",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"settlementMyShortage",
+						"segment",
+						"FUTURES_OPTIONS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "physical obligations by settlement no",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/physicalSettlement/obligations/settlement/N1983327",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"physicalSettlement",
+						"obligations",
+						"settlement",
+						"N1983327"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "physical by obligation type by settlement no",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/physicalSettlement/obligations/settlement/N8633068/obligationType/funds",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"physicalSettlement",
+						"obligations",
+						"settlement",
+						"N8633068",
+						"obligationType",
+						"funds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remainingFundsObligation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/fundsObligation/settlement/N1062303",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fundsObligation",
+						"settlement",
+						"N1062303"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fundsPayinRequest",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/fundsPayinRequest/settlement/N1983327",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fundsPayinRequest",
+						"settlement",
+						"N1983327"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit fundsPayinRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"settlementNumber\": \"N1983327\",\n\t\"requestedAmount\": 10011230,\n\t\"requestedStatus\": \"Pending\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/fundsPayinRequest",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fundsPayinRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "physicalSettlement",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF002"
+					},
+					{
+						"key": "userId",
+						"value": "PROF002"
+					},
+					{
+						"key": "memberType",
+						"value": "CM"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/physicalSettlement",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"physicalSettlement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clearingMembers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"value": "PROF001"
+					},
+					{
+						"key": "userId",
+						"value": "PROF001"
+					},
+					{
+						"key": "memberType",
+						"value": "NCL"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/clearingMembers",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"clearingMembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "settlements",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/settlements?date=2020-09-01",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"settlements"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-09-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payinObligation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/payinObligation?memberId=id-1&settlementNo=no-1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"payinObligation"
+					],
+					"query": [
+						{
+							"key": "memberId",
+							"value": "id-1"
+						},
+						{
+							"key": "settlementNo",
+							"value": "no-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "memberResults",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/memberResults?settlementNo=no-1&monitorName=mt-2 name&securityType=st-2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"memberResults"
+					],
+					"query": [
+						{
+							"key": "settlementNo",
+							"value": "no-1"
+						},
+						{
+							"key": "monitorName",
+							"value": "mt-2 name"
+						},
+						{
+							"key": "securityType",
+							"value": "st-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "securityResults",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/securityResults?settlementNo=no-1&monitorName=mt-2 name&securityType=st-2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"securityResults"
+					],
+					"query": [
+						{
+							"key": "settlementNo",
+							"value": "no-1"
+						},
+						{
+							"key": "monitorName",
+							"value": "mt-2 name"
+						},
+						{
+							"key": "securityType",
+							"value": "st-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allocatedshortagePayouts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "id-1"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/allocatedshortagePayouts?settlementNo=no-1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"allocatedshortagePayouts"
+					],
+					"query": [
+						{
+							"key": "settlementNo",
+							"value": "no-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "myShortagePayouts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "memberId",
+						"type": "text",
+						"value": "test"
+					},
+					{
+						"key": "userId",
+						"type": "text",
+						"value": "id-1"
+					},
+					{
+						"key": "memberType",
+						"type": "text",
+						"value": "member"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/v1/myShortagePayouts?settlementNo=no-1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"myShortagePayouts"
+					],
+					"query": [
+						{
+							"key": "settlementNo",
+							"value": "no-1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

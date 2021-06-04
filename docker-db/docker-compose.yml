@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: oracle/skyscraper-database:18.4.0-xe
+    build:
+      context: ./18.4.0
+      dockerfile: Dockerfile.xe
+    container_name: skyscraper-db
+    environment:
+      - ORACLE_PWD=Topcoder123
+      - ORACLE_CHARACTERSET=AL32UTF8
+    ports:
+      - "1521:1521"

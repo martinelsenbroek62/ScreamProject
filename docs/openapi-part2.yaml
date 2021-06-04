@@ -1,0 +1,1424 @@
+
+openapi: 3.0.2
+info:
+  title: Shortage Service - REST Part2
+  description: Authentication depends on signed-in user. Admin or specific Professor. Details to come in on API Header
+  version: 1.0.0
+servers:
+  - url: /v1
+
+tags:
+  - name: shortage-service
+
+paths:
+  /settlementSchedule:
+    get:
+      tags:
+        - shortage-service
+      description: Fetch the events/details from Settlement_Schedule based on today’s and next working day
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/SettlementScheduleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  /physicalSettlement:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+        Fetch the funds and security obligations for AA / Physical Settlement
+        based on settlement number. 
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalSettlementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  /clearingProfessors:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+        Fetch Senior Directors when XYZ user is logged
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClearingProfessorsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+
+  /cashSettlement/clearingProfessor/{clearingProfessor}/settlement:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+         Fetch net funds obligation for each segment (Aggregated by Professor – for XYZ user). This API is used for MC and XYZ users. {clearingProfessor} is not needed for SD users.
+      parameters:
+        - in: path
+          name: clearingProfessor
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashSettlementClearingProfessorsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+
+  /cashSettlement/segment/{segment}/obligation/{obligation}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+         Fetch the net funds obligation (receivable or payable) aggregated by segment for XYZ users
+      parameters:
+        - in: path
+          name: segment
+          schema:
+            type: string
+            enum: [AA, AB, AC, AD, AEE]
+          required: true
+        - in: path
+          name: obligation
+          schema:
+            type: string
+            enum: [RECEIVABLE, PAYABLE]
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashSettlementSegmentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+          
+  /physicalSettlement/obligations/settlement/{settlementNo}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+         Fetch the list for aggregated securities obligation 
+      parameters:
+        - in: path
+          name: settlementNo
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalSettlementObligationsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /physicalSettlement/obligations/settlement/{settlementNo}/obligationType/{obligationType}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+         Fetch the list for fund or securities obligation based on toggle selection
+      parameters:
+        - in: path
+          name: settlementNo
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: obligationType
+          schema:
+            type: string
+            enum: [securities, funds]
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalSettlementObligations01Response'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /fundsPayinRequest:
+    post:
+      tags:
+        - shortage-service
+      description: >-
+          Submit new payin request
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FundsPayinRequest'
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsPayinRequest01Response'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /fundsPayinRequest/settlement/{settlementNo}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+         Fetch full payin request history based on settlement number 
+      parameters:
+        - in: path
+          name: settlementNo
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsPayinRequestResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /fundsObligation/settlement/{settlementNo}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+          Fetch remaining funds obligation based on settlement number 
+      parameters:
+        - in: path
+          name: settlementNo
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsObligationResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'      
+  
+  /directPayout:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+        Dashboard shows clustered column chart of Top 10 securities by value of DPO credited. Chart shows a pair of columns for each security - DPO requested, DPO credited. 
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectPayoutResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /directPayout/settlement/{settlementNumber}/isRequest/class/{class}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+          Display the DPO records for that selected security: Detailed table grid shows allocation status for each security: detailed records of DPO for each security
+      parameters:
+        - in: path
+          name: settlementNumber
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: class
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectPayoutSettlementNumberResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+  
+  /settlementShortageAllocatedToMe/settlement/{settlementNumber}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+          As a Senior Director, I should be able to view the final status of the shortages allocated to me as well as the shortages committed by me.
+      parameters:
+        - in: path
+          name: settlementNumber
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementShortageAllocatedToMeResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'    
+          
+  /settlementMyShortage/segment/{segment}:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+          Fetch shortages for different settlements aggregated by segment. 
+      parameters:
+        - in: path
+          name: segment
+          schema:
+            type: string
+            enum: [AA, AB, AC, AD, AEE]
+          required: true
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementMyShortageResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError' 
+          
+  /monitorDirectPayout:
+    post:
+      tags:
+        - shortage-service
+      description: >-
+          a. API to upload the file
+          Note – File will contain header then associated records, header then associated records, and so on...
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/MonitorDirectPayoutRequest'
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorDirectPayoutResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'        
+          
+  /reports:
+    get:
+      tags:
+        - shortage-service
+      description: >-
+          Update the ETA of the report - Only for XYZ user
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportsResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+          
+    put:
+      tags:
+        - shortage-service
+      description: >-
+          Submit new payin request
+      parameters:
+        - in: header
+          name: memberId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: memberType
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ReportsRequest'
+        required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportsResponse'
+                
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/BadRequestError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailableError'
+          
+# Define the reusable objects
+components:
+  # Use JSON Web Token in header for authentication
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: memberId
+
+
+  # Define commonly-used error responses
+  responses:
+    BadRequestError:
+      description: Missing or malformed parameters/body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel01'
+    UnauthorizedError:
+      description: Missing or invalid JSON Web Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel01'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel01'
+    ServiceUnavailableError:
+      description: Service unavailable error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel01'
+
+  # Define the data models
+  schemas:
+    # Message returned by endpoints on error conditions
+    ErrorModel02:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        errorMsg:
+          type: string
+        errorRespoMCQ:
+          type: string
+    
+    ErrorModel01:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+        errorMsgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionalOfficeId'
+        path:
+          type: string
+          
+    RegionalOfficeId:
+      type: object
+      properties:
+        regionalOfficeId:
+          type: string
+         
+    ReportsRequest:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+            
+    ReportsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+    
+    Report:
+      properties:
+        segment:
+          type: string
+        reportType:
+          type: string
+        reportID:
+          type: string
+        reportName:
+          type: string
+        status:
+          type: string
+        todayETA:
+          type: string
+        defaultETA:
+          type: string
+        modifiedETA:
+          type: string
+          
+    MonitorDirectPayoutResponse:
+      type: object
+      properties:
+        monitorDirectPayout:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitorDirectPayoutResp'
+            
+    MonitorDirectPayoutResp:
+      type: object
+      properties:
+        header:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Header'
+        payoutDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutDetailResp'
+        message:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+    
+    PayoutDetailResp:
+      properties:
+        recordType:
+          type: string
+        isin:
+          type: string
+        depositoryID:
+          type: string
+        beneficiaryAccountNo:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+          
+    MonitorDirectPayoutRequest:
+      type: object
+      properties:
+        monitorDirectPayout:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitorDirectPayoutReq'
+            
+    MonitorDirectPayoutReq:
+      type: object
+      properties:
+        header:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Header'
+        payoutDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutDetailReq'
+            
+    Header:
+      properties:
+        recordType:
+          type: string
+        fileType:
+          type: string
+        professorType:
+          type: string
+        professorCode:
+          type: string
+        settlementType:
+          type: string
+        settlementNumber:
+          type: string
+        deliveryType:
+          type: string
+        batchNumber:
+          type: integer
+          format: int32
+        totalRecords:
+          type: integer
+          format: int32
+        totalQuantity:
+          type: integer
+          format: int32
+          
+    PayoutDetailReq:
+      properties:
+        recordType:
+          type: string
+        isin:
+          type: string
+        depositoryId:
+          type: string
+        beneficiaryAccountNo:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+          
+    SettlementMyShortageResponse:
+      type: object
+      properties:
+        myShortage:
+          type: array
+          items:
+            $ref: '#/components/schemas/MyShortage'
+            
+    MyShortage:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        shortageDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortageDetail02'
+        aggregateShortageToCC:
+          type: string
+        aggregateFillByAuction:
+          type: string
+        aggregateFillByCloseout:
+          type: string
+        aggregateAuctionPenalty:
+          type: string
+        aggregateCloseoutPenalty:
+          type: string
+        
+    ShortageDetail02:
+      type: object
+      properties:
+        isin:
+          type: string
+        shortageToCC:
+          type: string
+        fillByAuction:
+          type: string
+        fillByCloseout:
+          type: string
+        auctionPenalty:
+          type: string
+        closeoutPenalty:
+          type: string
+        otherFinancialInstrumentIdentification:
+          type: string
+    
+    SettlementShortageAllocatedToMeResponse:
+      type: object
+      properties:
+        shortageAllocatedToMe:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortageAllocatedToMe'
+            
+    ShortageAllocatedToMe:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        shortageDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShortageDetail01'
+        aggregateShortageFromCC:
+          type: number
+          format: double
+        aggregateFillByAuction:
+          type: number
+          format: double
+        aggregateFillByCloseout:
+          type: number
+          format: double
+        
+    ShortageDetail01:
+      type: object
+      properties:
+        isin:
+          type: string
+        shortageFromCC:
+          type: number
+          format: double
+        fillByAuction:
+          type: number
+          format: double
+        fillByCloseout:
+          type: number
+          format: double
+        otherFinancialInstrumentIdentification:
+          type: string
+          
+    DirectPayoutSettlementNumberResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        monitorDirectPayoutDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonitorDirectPayoutDetail'
+            
+    MonitorDirectPayoutDetail:
+      type: object
+      properties:
+        isin:
+          type: string
+        class:
+          type: string
+        section:
+          type: string
+        depository:
+          type: string
+        beneficiaryAccount:
+          type: string
+        requestQuantity:
+          type: integer
+          format: int32
+        creditQuantity:
+          type: integer
+          format: int32
+        valuationPrice:
+          type: number
+          format: double
+        remarks:
+          type: string
+          
+    DirectPayoutResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        message:
+          type: string
+        directPayout:
+          type: array
+          items:
+            $ref: '#/components/schemas/DirectPayout'
+    DirectPayout:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        statusBySecurity:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusBySecurity'
+        
+    StatusBySecurity:
+      type: object
+      properties:
+        credit:
+          type: number
+          format: double
+        request:
+          type: number
+          format: double
+        otherFinancialInstrumentIdentification:
+          type: string
+          
+    FundsPayinRequest:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        requestedAmount:
+          type: number
+          format: double
+        requestedStatus:
+          type: string
+          enum: [COMPLETED, INCOMPLETE, PENDING]
+          
+    FundsObligationResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        epiAmount:
+          type: string
+        amountInWords:
+          type: string
+    
+    FundsPayinRequest01Response:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        responseMsg:
+          type: string
+          
+    FundsPayinRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        fundsPayinRequestHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/FundsPayinRequestHistory'
+    FundsPayinRequestHistory:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        requestDate:
+          type: string
+          format: "YYYY-mm-dd"
+        requestTime:
+          type: string
+          format: time
+        requestAmount:
+          type: number
+          format: double
+        requestStatus:
+          type: string
+          enum: [COMPLETED, INCOMPLETE, PENDING]
+          
+    PhysicalSettlementObligations01Response:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        fundsObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/FundsObligation'
+    FundsObligation:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        clearingProfessorIdentification:
+          type: string
+        clearingProfessorName:
+          type: string
+        obligationPayable:
+          type: number
+          format: double
+        feesEpi:
+          type: number
+          format: double
+        fullPayinStatus:
+          type: string
+          enum: [INCOMPLETE, COMPLETED]
+          
+    PhysicalSettlementObligations02Response:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        securitiesObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecuritiesObligation02'
+    SecuritiesObligation02:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        clearingProfessorIdentification:
+          type: string
+        clearingProfessorName:
+          type: string
+        securityClass:
+          type: string
+        section:
+          type: string
+        isin:
+          type: string
+        quantity:
+          type: string
+        lastClosingPrice:
+          type: string
+        value:
+          type: string
+          
+    PhysicalSettlementObligationsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        securitiesObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecuritiesObligation01'
+    SecuritiesObligation01:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+        otherFinancialInstrumentIdentification:
+          type: string
+        section:
+          type: string
+        isin:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        lastClosingPrice:
+          type: number
+          format: double
+        value:
+          type: number
+          format: double
+          
+    CashSettlementSegmentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        netFundsObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetFundsObligation02'
+    NetFundsObligation02:
+      type: object
+      properties:
+        clearingProfessorId:
+          type: string
+        clearingProfessorName:
+          type: string
+        funds:
+          type: number
+          format: double
+          
+    CashSettlementClearingProfessorsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        netFundsObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetFundsObligation01'
+    NetFundsObligation01:
+      type: object
+      properties:
+        segment:
+          type: string
+          enum: [AB, AC, AD]
+        date:
+          type: string
+          format: "YYYY-mm-dd"
+        totalStrikePrice:
+          type: number
+          format: double
+    ClearingProfessorsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        clearingProfessors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClearingProfessor'
+    ClearingProfessor:
+      type: object
+      properties:
+        clearingProfessorIdentification:
+          type: string
+        description:
+          type: string
+    PhysicalSettlementResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        physicalSettlement:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhysicalSettlement'
+    PhysicalSettlement:
+      type: object
+      properties:
+        settlementNumber:
+          type: string
+          example: N1234567
+        date:
+          type: string
+          format: "YYYY-mm-dd"
+        fundObligation:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/FundObligation'
+        securityObligation:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityObligation'
+        fullPayinStatus:
+          type: string
+          enum: [Completed, Incomplete, Pending]
+    FundObligation:
+      type: object
+      properties:
+        total:
+          type: number
+          format: double
+        fullPayin:
+          type: number
+          format: double
+    SecurityObligation:
+      type: object
+      properties:
+        monitorCode:
+          type: string
+        netResultdvalue:
+          type: integer
+          format: int32
+    SettlementScheduleResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 200
+        settlementSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementSchedule'
+    SettlementSchedule:
+      type: object
+      properties:
+        settlementDate:
+          type: string
+          format: "YYYY-mm-dd"
+        settlementEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementEvent'
+    SettlementEvent:
+        type: object
+        properties:
+          settlementTime:
+            type: integer
+            format: int32
+            example: 630
+            description: represents time in minutes e.g 630 means '10:30'
+          settlementActivity:
+            type: string
+            enum: [Enter Shortages Deadline, PayIn Deadline, Shortage Allocation Deadline, PayOut Deadline, DPO Deadline]
+          segment:
+            type: string
+            enum: [AA, AB, AC, AD, AEE]
+          settlementTypeNo:
+            type: string
+            example: N1234567
